@@ -31,6 +31,7 @@ public class Config {
     public static boolean singleHotbarModeShowOnModiferKey;
     public static boolean inverseScrollDirection;
     public static boolean doubleTapMovesToNextHotbar;
+    public static boolean overlayOriginalHotbar;
 
     /**
      * Loads the config from a file and stores the values in memory. It also re-saves the config, stripping out any
@@ -138,6 +139,13 @@ public class Config {
                 "",
                 BASE_LANG + "general.doubleTapMovesToNextHotbar"
         );
+        overlayOriginalHotbar = config.getBoolean(
+                "overlay_original_hotbar",
+                Configuration.CATEGORY_GENERAL,
+                !defaults && overlayOriginalHotbar,
+                "",
+                BASE_LANG + "general.overlayOriginalHotbar");
+
     }
 
     /**

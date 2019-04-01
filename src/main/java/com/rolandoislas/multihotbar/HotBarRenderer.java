@@ -34,7 +34,13 @@ public class HotBarRenderer extends Gui {
         // Check if hotbar should render
         if (!(event.getType().equals(RenderGameOverlayEvent.ElementType.HOTBAR) && event.isCancelable()))
             return;
-        event.setCanceled(true);
+        // Optionally draw over the original hotbar for compatibility with other mods.
+        if (!Config.overlayOriginalHotbar) {
+            event.setCanceled(true);
+        } else {
+            GlStateManager.pushMatrix();
+            GlStateManager.translate(0, 0, 300);
+        }
         // Render
         GlStateManager.color(1, 1, 1, 1);
         //GlStateManager.disableLighting();
@@ -60,6 +66,9 @@ public class HotBarRenderer extends Gui {
                 !Minecraft.getMinecraft().player.inventory.offHandInventory.get(0).isEmpty()) {
             drawOffhandSlot();
             drawOffhandItem();
+        }
+        if (Config.overlayOriginalHotbar) {
+            GlStateManager.popMatrix();
         }
     }
 
@@ -196,10 +205,12 @@ public class HotBarRenderer extends Gui {
         minecraft.getTextureManager().bindTexture(WIDGETS);
         GlStateManager.color(1, 1, 1, 1);
         GlStateManager.disableLighting();
-        GlStateManager.enableBlend();
-        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA,
-                GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE,
-                GlStateManager.DestFactor.ZERO);
+        if (!Config.overlayOriginalHotbar) {
+            GlStateManager.enableBlend();
+            GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA,
+                    GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE,
+                    GlStateManager.DestFactor.ZERO);
+        }
         minecraft.ingameGUI.drawTexturedModalRect(x, y, 0, 0, HOTBAR_WIDTH, HOTBAR_HEIGHT);
     }
 
