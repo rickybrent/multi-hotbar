@@ -55,6 +55,8 @@ multihotbar.config.general.inverseScrollDirection=Invert Scroll Direction
 multihotbar.config.general.inverseScrollDirection.tooltip=If enabled, all actions that change the hotbar index (e.g. scroll, double tap hotbar key) will be reversed.
 multihotbar.config.general.doubleTapMovesToNextHotbar=Enable Double Tap
 multihotbar.config.general.doubleTapMovesToNextHotbar.tooltip=If enabled, tapping one of the first nine hotbar keys when the current selection matches the key index (e.g. tapping one when the first slot on a hotbar is selected) will move to the next hotbar.
+multihotbar.config.general.detailedTooltips=Enable Detailed Tooltips
+multihotbar.config.general.detailedTooltips.tooltip=Display additional tooltip information when the selected item changes.
 
 # Messages
 

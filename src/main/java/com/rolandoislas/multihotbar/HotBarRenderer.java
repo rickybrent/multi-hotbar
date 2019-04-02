@@ -7,10 +7,14 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import org.lwjgl.opengl.GL11;
+
+import java.util.List;
 
 /**
  * Created by Rolando on 6/6/2016.
@@ -109,6 +113,13 @@ public class HotBarRenderer extends Gui {
             GlStateManager.pushMatrix();
             GlStateManager.enableBlend();
             OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+            if (Config.detailedTooltips) {
+                List<String> details = item.getTooltip(minecraft.player, minecraft.gameSettings.advancedItemTooltips ? ITooltipFlag.TooltipFlags.ADVANCED : ITooltipFlag.TooltipFlags.NORMAL);
+                for (int i = details.size() - 1; i > 0; --i) {
+                    minecraft.fontRenderer.drawStringWithShadow(TextFormatting.GRAY +details.get(i), x, y, 16777215 + (color << 24));
+                    y -= 10;
+                }
+            }
             minecraft.fontRenderer.drawStringWithShadow(item.getDisplayName(), x, y, 16777215 + (color << 24));
             GlStateManager.disableBlend();
             GlStateManager.popMatrix();

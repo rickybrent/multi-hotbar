@@ -31,6 +31,7 @@ public class Config {
     public static boolean singleHotbarModeShowOnModiferKey;
     public static boolean inverseScrollDirection;
     public static boolean doubleTapMovesToNextHotbar;
+    public static boolean detailedTooltips;
 
     /**
      * Loads the config from a file and stores the values in memory. It also re-saves the config, stripping out any
@@ -137,6 +138,13 @@ public class Config {
                 defaults || doubleTapMovesToNextHotbar,
                 "",
                 BASE_LANG + "general.doubleTapMovesToNextHotbar"
+        );
+        detailedTooltips = config.getBoolean(
+                "detailed_tooltips",
+                Configuration.CATEGORY_GENERAL,
+                !defaults && detailedTooltips,
+                "",
+                BASE_LANG + "general.detailedTooltips"
         );
     }
 
